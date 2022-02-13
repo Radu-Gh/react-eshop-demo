@@ -18,7 +18,7 @@ function updateUserError(payload) {
     }
 }
 
-export function loginUser() {
+export function loginWithGoogle() {
     return (dispatch) => {
         dispatch(startLoading());
 
@@ -27,6 +27,12 @@ export function loginUser() {
         }).catch(error => {
             dispatch(updateUserError(error));
         });
+    }
+}
+
+export function loginWithFacebook() {
+    return (dispatch) => {
+        dispatch(startLoading());
 
         signInWithFacebook().then(userData => {
             dispatch(updateUserData(userData.user));
