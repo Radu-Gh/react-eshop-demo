@@ -3,7 +3,8 @@ import Layout from '../../components/layout/Layout';
 import products from '../../utils/products.json';
 import './Product.css';
 import { connect } from 'react-redux';
-import { addToCart } from '../../redux/actions/cart';
+import { addToCart } from '../../redux/cart/cartActions';
+import { addToFavourite } from '../../redux/favourite/favouriteActions';
 
 class Product extends React.Component {
     constructor(props) {
@@ -58,6 +59,22 @@ class Product extends React.Component {
                             >
                                 Adaugă în coș
                             </button>
+                            <button
+                                className="btn btn-dark mb-4 font-weight-bold"
+                                onClick={() => {
+                                    this.props.addToFavourite({
+                                        product: {
+                                            id: product.id,
+                                            name: product.name,
+                                            price: product.price,
+                                            currency: product.currency,
+                                            image: product.image
+                                        }
+                                    })
+                                }}
+                            >
+                                Adaugă în favorite
+                            </button>
                             <p><span className="font-weight-bold">Marimea ecranului</span>: {product.screenSize}</p>
                             <p><span className="font-weight-bold">Baterie</span>: {product.batteryLife}</p>
                             <p><span className="font-weight-bold">Memorie</span>: {product.memory}</p>
@@ -74,7 +91,8 @@ class Product extends React.Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        addToCart: (payload) => dispatch(addToCart(payload))
+        addToCart: (payload) => dispatch(addToCart(payload)),
+        addToFavourite: (payload) => dispatch(addToFavourite(payload))
     }
 }
 

@@ -1,21 +1,21 @@
 import React from 'react';
 import Layout from '../../components/layout/Layout';
 import { connect } from 'react-redux';
-import { removeFromCart } from '../../redux/cart/cartActions';
+import { removeFromFavourite } from '../../redux/favourite/favouriteActions';
 import { Link } from 'react-router-dom';
-import './Cart.css';
+import './Favourite.css';
 import { ReactComponent as Close} from '../../assets/icons/close.svg';
 
-function Cart(props) {
+function Favourite(props) {
     const totalSum = (products) => {
         return products.reduce((acc, product) => {
-            return acc + product.quantity * product.price;
+            return acc + product.price;
         }, 0)
     }
 
     return(
         <Layout>
-            <div className="cart-page container-fluid container-min-max-width
+            <div className="favourite-page container-fluid container-min-max-width
                 d-flex flex-column justify-content-center align-items-center">
                 {
                     props.products.length
@@ -23,8 +23,6 @@ function Cart(props) {
                         <div className="d-flex justify-content-between text-center h4 text-bold">
                             <p className="w-25">Produs</p>
                             <p className="w-25">Pret</p>
-                            <p className="w-25">Cantitate</p>
-                            <p className="w-25">Total</p>
                         </div>
                         {
                             props.products.map(product => {
@@ -33,11 +31,9 @@ function Cart(props) {
                                         <img src={product.image} alt="Produs"/>
                                         <p>{ product.name }</p>
                                     </div>
-                                    <p className="w-25">{ product.price } { product.currency }</p>
-                                    <p className="w-25">{ product.quantity }</p>
                                     <div className="w-25 d-flex justify-content-center">
-                                        <p className="mr-2">{ product.price * product.quantity } { product.currency }</p>
-                                        <div onClick={() => props.removeFromCart({id: product.id})}>
+                                        <p className="mr-2">{ product.price } { product.currency }</p>
+                                        <div onClick={() => props.removeFromFavourite({id: product.id})}>
                                             <Close />
                                         </div>
                                     </div>
@@ -56,7 +52,7 @@ function Cart(props) {
                         </div>
                     </div>
                     : <div className="d-flex flex-column align-items-center">
-                        <p className="h3">Nu ai produse în coș!</p>
+                        <p className="h3">Nu ai produse favorite!</p>
                         <Link to="/"><button className="btn btn-outline-dark">Inapoi la home</button></Link>
                     </div>
                 }
@@ -67,14 +63,14 @@ function Cart(props) {
 
 function mapStateToProps(state) {
     return {
-        products: state.cart.products
+        products: state.favourite.products
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        removeFromCart: (payload) => dispatch(removeFromCart(payload))
+        removeFromFavourite: (payload) => dispatch(removeFromFavourite(payload))
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Favourite);

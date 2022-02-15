@@ -1,3 +1,5 @@
+import * as constants from './userConstants'
+
 const initialState = {
     data: null,
     loading: false,
@@ -6,17 +8,17 @@ const initialState = {
 
 export function userReducer(state = initialState, action) {
     switch (action.type) {
-        case 'START_LOADING':
+        case `${constants.start}`:
             return Object.assign({}, state, {
                 loading: true
             });
-        case 'UPDATE_USER_DATA':
+        case `${constants.updateData}`:
             return Object.assign({}, state, {
                 data: action.payload,
                 loading: false,
                 error: null
             });
-        case 'UPDATE_USER_ERROR':
+        case `${constants.updateError}`:
             return Object.assign({}, state, {
                 error: action.payload,
                 loading: false

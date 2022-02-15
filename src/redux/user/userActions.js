@@ -1,19 +1,21 @@
 import { signInWithGoogle, signInWithFacebook, signOut } from '../../apis/firebase/firebase';
+import * as constant from './userConstants'
+
 
 function startLoading() {
     return {
-        type: 'START_LOADING'
+        type: constant.start
     }
 }
 function updateUserData(payload) {
     return {
-        type: 'UPDATE_USER_DATA',
+        type: constant.updateData,
         payload
     }
 }
 function updateUserError(payload) {
     return {
-        type: 'UPDATE_USER_ERROR',
+        type: constant.updateError,
         payload
     }
 }

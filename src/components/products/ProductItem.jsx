@@ -1,7 +1,8 @@
 import React from 'react';
 import './ProductItem.css';
 import { connect } from 'react-redux';
-import { addToCart } from '../../redux/actions/cart';
+import { addToCart } from '../../redux/cart/cartActions';
+import { addToFavourite } from '../../redux/favourite/favouriteActions';
 import { Link } from 'react-router-dom';
 
 function ProductItem(props) {
@@ -28,13 +29,29 @@ function ProductItem(props) {
             >
                 Adaugă în coș
             </button>
+            
+            <button
+                className="btn btn-outline-dark"
+                onClick={() => props.addToFavourite({
+                    product: {
+                        id,
+                        name,
+                        price,
+                        currency,
+                        image
+                    }
+                })}
+            >
+                Adaugă în favorite
+            </button>
         </div>
     );
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        addToCart: (product) => dispatch(addToCart(product))
+        addToCart: (product) => dispatch(addToCart(product)),
+        addToFavourite: (product) => dispatch(addToFavourite(product))
     };
 }
 

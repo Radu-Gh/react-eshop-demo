@@ -1,0 +1,9 @@
+/* Setam dimensiunea maxima pentru imagine in pagin de favorite */
+.favourite-page img {
+    max-height: 100px;
+}
+
+/* Vrem sa schimbam cursorul la hover peste iconita care sterge produsul din favorite */
+.favourite-page svg {
+    cursor: pointer;
+}
